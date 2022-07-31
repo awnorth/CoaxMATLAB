@@ -25,7 +25,7 @@ phi = theta + psi - pi/2;
 phi_degree = phi*180/pi;
 
 % Calculate Forces
-fThrust = 10.9; % Newtons
+fThrust = 10; % Newtons
 
 % Numerical Integration
 tspan = [0 5];

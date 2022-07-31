@@ -2,6 +2,6 @@
 
 **Derive Equations of Motion**\
 **Simulate Vehicle Dynamics**\
-**Develope Control System**\
+**Develope Control System**
 
 *by Andrew North*

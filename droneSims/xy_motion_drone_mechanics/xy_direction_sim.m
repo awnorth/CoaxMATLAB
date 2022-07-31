@@ -12,7 +12,7 @@ radius = 0.4; % m
 height = 1; % m
 
 % Input:
-psi = pi-(0*pi/180); % servo angle
+psi = pi-(1*pi/180); % servo angle
 psi_degree = psi*180/pi;
 
 % Calculate theta (measure against gyroscope) 

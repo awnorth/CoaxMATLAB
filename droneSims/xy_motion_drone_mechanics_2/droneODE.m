@@ -7,8 +7,9 @@ C_d = 0.5; % coefficient of drag (approximated 0.5)
 A = 0.3*0.09; % m^2 cross sectional area of drone
 g = 9.81;
 M = m1+m2;
-I = (M/48)*(3*(radius*2)^2+4*height^2); % mass moment of intertia of solid cylinder
-I = .1;
+Icm = (M/48)*(3*(radius*2)^2+4*height^2); % mass moment of intertia of solid cylinder
+Igyro = 0.5;
+I = Icm + Igyro;
 d1 = (m2/M)*(L1+L3); % distance from m1 to drone center of mass
 d2 = (m1/M)*(L1+L3); % distance from m2 to drone center of mass
 

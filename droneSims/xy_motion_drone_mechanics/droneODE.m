@@ -46,6 +46,7 @@ dxdt(2,1) = (1/M)*fThrust*cos(phi+x(5))-(1/M)*fDragC*x(2)^2;
 dxdt(3,1) = x(4);
 dxdt(4,1) = -(1/M)*fG1-(1/M)*fG2+(1/M)*fThrust*sin(phi+x(5))-(1/M)*fDragC*x(4)^2;
 dxdt(5,1) = x(6);
-dxdt(6,1) = (1/I)*(-fG1*d1*sin(-x(5))+fG2*d2*sin(-x(5))-fThrust*d1*cos(phi));
-
+% dxdt(6,1) =
+% (1/I)*(-fG1*d1*sin(-x(5))+fG2*d2*sin(-x(5))-fThrust*d1*cos(phi)); % old
+dxdt(6,1) = (1/I)*(-fG1*d1*sin(x(5))+fG2*d2*sin(x(5))-fThrust*d1*cos(phi+x(5)));
 end
