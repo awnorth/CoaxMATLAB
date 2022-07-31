@@ -1,0 +1,53 @@
+% Coaxial Drone Calculations and Simulation
+% Andrew North 
+% Started code: 7/18/2022, 7/19, 
+
+% Constants:
+L1 = 0.05; %m
+L3 = 0.1; %m
+m1 = 0.3; % kg
+m2 = 0.7; % kg
+M = m1+m2; % kg
+radius = 0.4; % m
+height = 1; % m
+
+% Input:
+psi = pi-(10*pi/180); % servo angle
+psi_degree = psi*180/pi;
+
+% Calculate theta (measure against gyroscope) 
+% calcs based on m1 & m2 aligning vertically
+theta = atan((sin(psi))/((L3/L1)-cos(psi)));
+theta_degree = theta*180/pi;
+
+% Calculate phi (thrust vector)
+phi = theta + psi - pi/2;
+phi_degree = phi*180/pi;
+
+sigma = phi - pi/2;
+sigma_degree = sigma*180/pi;
+
+% Calculate Forces
+F_x = x_force(phi,m1,m2); % force in x-direction
+
+% for i=1:-.01:0
+%     F_x = i;
+
+
+    % Numerical Integration
+tspan = [0 15];
+x0 = [0;0];
+[t,x] = ode45(@(t,x) xfunc(t,x,F_x,M),tspan,x0);
+    
+plot(t,x(:,1),t,x(:,2))
+title('State vs. Time (psi = 160, including drag)');
+xlabel('time (seconds)');
+ylabel('x-position (meters) & velocity (m/s)');
+legend('postion','velocity');
+
+
+% Call simulation
+for k=1:length(t)
+    drawdrone(x(k,:),psi,phi,(phi-pi/2),theta,radius,height);
+end
+

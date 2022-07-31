@@ -1,0 +1,2 @@
+
+[reactionTime, reactionC] = ode45(@odefun,[0 5],)
