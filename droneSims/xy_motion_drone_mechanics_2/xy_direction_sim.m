@@ -30,7 +30,7 @@ fThrust = 10; % Newtons
 % Numerical Integration
 tspan = [0 5];
 x0 = [0;0;0;0;0;0];
-[t,x] = ode45(@(t,x) droneODE(t,x,fThrust,m1,m2,phi,radius,height,L1,L3),tspan,x0);
+[t,x] = ode45(@(t,x) droneODE(t,x,fThrust,psi,m1,m2,radius,height,L1,L3),tspan,x0);
     
 plot(t,x(:,1),t,x(:,2),t,x(:,3),t,x(:,4),t,x(:,5))
 yline(0,'--')

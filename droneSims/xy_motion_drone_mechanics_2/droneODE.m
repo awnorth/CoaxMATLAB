@@ -1,5 +1,5 @@
 
-function dxdt = droneODE(t,x,fThrust,m1,m2,phi,radius,height,L1,L3)
+function dxdt = droneODE(t,x,fThrust,psi,m1,m2,radius,height,L1,L3)
 
 % Parameters
 rho = 1.225; % kg/m^3 density of the air. Using density at sea level.
@@ -15,11 +15,10 @@ d2 = (m1/M)*(L1+L3); % distance from m2 to drone center of mass
 
 % Calculate theta (measure against gyroscope) 
 % calcs based on m1 & m2 aligning vertically
-% psi = -x(5);
-% theta = atan((sin(psi))/((L3/L1)-cos(psi)));
+theta = atan((sin(psi))/((L3/L1)-cos(psi)));
 
 % Calculate phi (thrust vector)
-% phi = theta + psi - pi/2;
+phi = theta + psi - pi/2;
 
 % Drag Force = 0.5*airDensity*Cd*areaCrossSection*velocity^2
 airDensity = 1.225; % kg/m^3
