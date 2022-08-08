@@ -50,7 +50,7 @@ plot(pent1_x_pos,pent1_y_pos,'color','red',LineWidth=2), hold on
 plot(pent2_x_pos,pent2_y_pos,'Color','red',LineWidth=2)
 
 
-axis([-.5 2 0 1.7]);, axis equal % sets simulation screen dimensions x x y y 
+axis([-.5 2 0 5]);, axis equal % sets simulation screen dimensions x x y y 
 xlabel('meters');
 ylabel('meters');
 set(gcf,'Position',[100 100 1000 400]) % sets size of simulation screen on page

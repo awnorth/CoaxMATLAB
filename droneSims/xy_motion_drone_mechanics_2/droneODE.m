@@ -1,7 +1,8 @@
-function dxdt = droneODE(t,x,U1,U2,m1,m2,radius,height,L1,L3)
-k = 4E-7; % F_thrust = k*(motor angular veloctiy)
-fThrust = U1(1)*k; % Input 1, thrust force
-psi = U2(2); % Input 2, servo angle psi
+function dxdt = droneODE(t,x,U,m1,m2,radius,height,L1,L3)
+% k = 4E-2; % F_thrust = k*(motor angular veloctiy)
+% fThrust = U1(1)*k; % Input 1, thrust force
+fThrust = U(1); % Input 1, thrust force
+psi = U(2); % Input 2, servo angle psi
 
 % Parameters
 airDensity = 1.225; % kg/m^3 density of the air. Using density at sea level.

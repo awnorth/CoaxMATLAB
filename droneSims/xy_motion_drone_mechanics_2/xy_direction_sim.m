@@ -58,7 +58,7 @@ I = (M/48)*(3*di^2+4*hi^2); % mass moment of intertia of solid cylinder
 
 % ---------- Linearized equations for control ---------- %
 % Parameters
-k = 4E-7; % F_thrust = k*(motor angular veloctiy)
+% k = 4E-7; % F_thrust = k*(motor angular veloctiy)
 
 A = [0 1 0 0 0 0;...
     0 (-0.5*drag2)/M 0 0 0 0;...
@@ -68,26 +68,34 @@ A = [0 1 0 0 0 0;...
     0 0 0 0 (g/I)*(m2*d2-m1*d1) 0];
 
 % Replaced X(5) with pi (replaced lambda with pi)
+% B = [0 0;...
+%     -k*pi -(2/3)*k*5000^2;...
+%     0 0;...
+%     k -(2/3)*k*5000^2*pi;...
+%     0 0;...
+%     0 (2*k*d1)/(3*I)*5000^2];
+
+% Update B matrix with F_thrust for input
 B = [0 0;...
-    -k*pi -(2/3)*k*5000^2;...
+    -1*(0) -(2*10/3);...
     0 0;...
-    k -(2/3)*k*5000^2*pi;...
+    1 -(2*10/3)*(0);...
     0 0;...
-    0 (2*k*d1)/(3*I)*5000^2];
+    0 (2*d1)/(3*I)*10];
 
 % eigs = [-1.1; -1.2; -1.3; -1.4; -1.5; -1.6];
 eigs = [-.2; -1.2; 0; -1.4; -1.5; -1.6];
 K = place(A,B,eigs);
 
 %% Numerical Integration with controller for U
-tspan = [0 1];
-x0 = [0;0;0;0;0;0];
-xf = [2;0;2;0;0;0];
-[t,x] = ode45(@(t,x) droneODE(t,x,-K*(x-xf),-K*(x-xf),m1,m2,radius,height,L1,L3),tspan,x0);
+tspan = [0 0.1];
+x0 = [1;0;1;0;0;2];
+xf = [2;0;1;0;0;0];
+[t,x] = ode45(@(t,x) droneODE(t,x,-K*(x),m1,m2,radius,height,L1,L3),tspan,x0);
 
 
 % Call simulation
-for k=1:length(t)
+for k=1:1000:length(t)
     animateDrone(x(k,:),psi,phi,theta,radius,height);
 end
 
