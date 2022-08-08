@@ -1,8 +1,8 @@
 % Coaxial Drone Calculations and Simulation
-% Andrew North 
+% Andrew North L1 = 0.05; %m
 % Started code: 7/18/2022, 7/19, 
 
-% Parameters:
+%% Parameters:
 L1 = 0.05; %m
 L3 = 0.1; %m
 m1 = 0.3; % kg
@@ -26,12 +26,16 @@ phi_degree = phi*180/pi;
 
 % Calculate Forces
 fThrust = 10; % Newtons
+K1 = [1 -1 1 2 2 -2];
+K2 = [1 2 1 2 3 1];
 
-% Numerical Integration
+%% Numerical Integration
 tspan = [0 5];
 x0 = [0;0;0;0;0;0];
-[t,x] = ode45(@(t,x) droneODE(t,x,fThrust,psi,m1,m2,radius,height,L1,L3),tspan,x0);
-    
+xf = [2;0;1.5;0;0;0];
+% [t,x] = ode45(@(t,x) droneODE(t,x,fThrust,psi,m1,m2,radius,height,L1,L3),tspan,x0);
+[t,x] = ode45(@(t,x) droneODE(t,x,-K1*x,-K2*x,m1,m2,radius,height,L1,L3),tspan,x0);
+
 plot(t,x(:,1),t,x(:,2),t,x(:,3),t,x(:,4),t,x(:,5))
 yline(0,'--')
 title('State vs. Time (\psi = 174^{\circ}, F_{thrust} = 12N)');

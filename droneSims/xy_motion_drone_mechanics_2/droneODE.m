@@ -1,4 +1,3 @@
-
 function dxdt = droneODE(t,x,fThrust,psi,m1,m2,radius,height,L1,L3)
 
 % Parameters
@@ -18,7 +17,7 @@ d2 = (m1/M)*(L1+L3); % distance from m2 to drone center of mass
 theta = atan((sin(psi))/((L3/L1)-cos(psi)));
 
 % Calculate phi (thrust vector)
-phi = theta + psi - pi/2;
+phi = theta + psi - pi/2 + x(5);
 
 % Drag Force = 0.5*airDensity*Cd*areaCrossSection*velocity^2
 airDensity = 1.225; % kg/m^3
@@ -41,11 +40,11 @@ x6 = x(6) = lambdaDot
 %}
 
 dxdt(1,1) = x(2);
-dxdt(2,1) = (1/M)*fThrust*cos(phi+x(5))-(1/M)*fDragC*x(2)^2;
+dxdt(2,1) = (1/M)*fThrust*cos(phi)-(1/M)*fDragC*x(2)^2;
 dxdt(3,1) = x(4);
-dxdt(4,1) = -(1/M)*fG1-(1/M)*fG2+(1/M)*fThrust*sin(phi+x(5))-(1/M)*fDragC*x(4)^2;
+dxdt(4,1) = -(1/M)*fG1-(1/M)*fG2+(1/M)*fThrust*sin(phi)-(1/M)*fDragC*x(4)^2;
 dxdt(5,1) = x(6);
 % dxdt(6,1) =
 % (1/I)*(-fG1*d1*sin(-x(5))+fG2*d2*sin(-x(5))-fThrust*d1*cos(phi)); % old
-dxdt(6,1) = (1/I)*(-fG1*d1*sin(x(5))+fG2*d2*sin(x(5))-fThrust*d1*cos(phi+x(5)));
+dxdt(6,1) = (1/I)*(-fG1*d1*sin(x(5))+fG2*d2*sin(x(5))-fThrust*d1*cos(phi));
 end

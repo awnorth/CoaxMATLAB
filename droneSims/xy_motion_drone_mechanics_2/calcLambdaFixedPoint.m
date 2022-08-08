@@ -1,3 +1,6 @@
+% Calculate lambda fixed point
+% See how lambda changes as psi ranges from 180 to 160 degrees.
+% Lambda fixed point around 0
 
 L1 = 0.05; %m
 L3 = 0.1; %m
